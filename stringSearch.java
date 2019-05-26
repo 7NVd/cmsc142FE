@@ -27,9 +27,50 @@ public class stringSearch {
 		System.out.println("No match");
 		System.out.println(ctr+" comparisons");
 	}
-	
+	private static int[] failureFunction(char[] p) {
+		int[] fail = new int[p.length];
+		int i = 1;
+		int j = 0;
+		while(i<p.length){
+			if(p[i]==p[j]){
+				fail[i]=j+1;
+				i++;
+				j++;
+			}else if(j>0) {
+				j = fail[j-1];
+			}else {
+				fail[i] = 0;
+				i++;
+			}		
+		}
+		return fail;
+	}
 	public void KMP() {
-		ctr = 0;
+		char[] t = str.toCharArray();
+		int[] fail = failureFunction(p);// generates the failure function
+		int i = 0;
+		int j = 0;
+		int comp = 0;
+		while(i<t.length) {
+			if(t[i]==p[j]) {
+				comp++;
+				if(j== p.length -1) {
+					System.out.println("Match found at "+i+"! Total no of comparisons are: "+ comp);			
+					return;
+				}else {
+					i++;
+					j++;		
+				}
+			}else {
+				comp++;
+				if(j>0) {
+					j = fail[j-1];
+				}else {
+					i++;
+				}
+			}
+		}
+		return;
 	}
 	
 	public void boyerMoore() {
