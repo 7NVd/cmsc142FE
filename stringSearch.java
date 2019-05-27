@@ -50,7 +50,8 @@ public class stringSearch {
 
 	public void KMP() {
 		ctr = 0;
-		char[] t = str.toCharArray();
+		char[] t = text.toCharArray();
+		char[] p = pat.toCharArray();
 		int[] fail = failureFunction(p);// generates the failure function
 		int i = 0;
 		int j = 0;
