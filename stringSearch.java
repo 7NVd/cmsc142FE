@@ -49,6 +49,7 @@ public class stringSearch {
 	}
 
 	public void KMP() {
+		ctr = 0;
 		char[] t = str.toCharArray();
 		int[] fail = failureFunction(p);// generates the failure function
 		int i = 0;
@@ -59,7 +60,21 @@ public class stringSearch {
 				comp++;
 				if(j== p.length -1) {
 					System.out.println("Match found at "+i+"! Total no of comparisons are: "+ comp);			
-		ctr = 0;
+					return;
+				}else {
+					i++;
+					j++;		
+				}
+			}else {
+				comp++;
+				if(j>0) {
+					j = fail[j-1];
+				}else {
+					i++;
+				}
+			}
+		}
+		return;
 	}
 	
 	public void boyerMoore() {
